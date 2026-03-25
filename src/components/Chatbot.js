@@ -125,14 +125,14 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 z-50">
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="glass mb-4 w-[350px] sm:w-[400px] h-[550px] rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-white/10"
+            className="glass w-[calc(100vw-2rem)] max-w-[360px] sm:max-w-[400px] h-[75vh] max-h-[560px] rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-white/10"
           >
             {/* Header */}
             <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/5">
@@ -254,16 +254,15 @@ export default function Chatbot() {
       </AnimatePresence>
 
       {/* Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shadow-lg hover:bg-red-700 hover:scale-110 transition-all active:scale-95 group"
-      >
-        {isOpen ? (
-          <X size={24} className="text-white" />
-        ) : (
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shadow-lg hover:bg-red-700 hover:scale-110 transition-all active:scale-95 group"
+          aria-label="Open AI chat"
+        >
           <MessageCircle size={24} className="text-white group-hover:rotate-12 transition-transform" />
-        )}
-      </button>
+        </button>
+      )}
     </div>
   );
 }
